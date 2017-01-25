@@ -65,7 +65,7 @@ class EAPS9000Driver(Driver):
 
     # yeah, the series PS 9000 (old) has this boolean inverted...
     def set_output(self, bool):
-        if not isinstance(bool, boolean):
+        if not bool in [0, 1]:
             raise ValueError("Expected bool to be a boolean value")
 
         self._write('OUTP '+ str(int(not bool)))
