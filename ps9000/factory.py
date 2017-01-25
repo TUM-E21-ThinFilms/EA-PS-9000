@@ -30,7 +30,7 @@ class PS9000Factory:
         logger.addHandler(fh)
         return logger
     
-    def create_pump(self, device="/dev/ttyUSB17", logger=None):
+    def create_powersupply(self, device="/dev/ttyUSB17", logger=None):
         if logger is None:
             logger = self.get_logger()
             

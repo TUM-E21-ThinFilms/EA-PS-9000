@@ -34,7 +34,7 @@ class EAPS9000Driver(Driver):
         return self._protocol.query(self._transport, message)
 
     def get_identification(self):
-        return self._query('*IDN?')
+        return str(self._query('*IDN?'))
 
     def reset(self):
         self._write('*RST')
@@ -63,12 +63,13 @@ class EAPS9000Driver(Driver):
     def measure_current(self):
         return float(self._query('MEAS:CURR?'))
 
+    # yeah, the series PS 9000 (old) has this boolean inverted...
     def set_output(self, bool):
         if not isinstance(bool, boolean):
             raise ValueError("Expected bool to be a boolean value")
 
-        self._write('OUTP '+ str(int(bool)))
+        self._write('OUTP '+ str(int(not bool)))
 
     def get_output(self):
-        return bool(self._query('OUTP?'))
+        return not bool(self._query('OUTP?'))
 
