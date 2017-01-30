@@ -33,6 +33,9 @@ class EAPS9000Driver(Driver):
     def _query(self, message):
         return self._protocol.query(self._transport, message)
 
+    def clear(self):
+        self._protocol.clear(self._transport)
+
     def get_identification(self):
         return str(self._query('*IDN?'))
 
