@@ -14,7 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from e21_util.logging import get_sputter_logger
+from e21_util.log import get_sputter_logger
 from e21_util.transport import Serial
 from protocol import EAPS9000Protocol
 from driver import EAPS9000Driver
