@@ -63,11 +63,11 @@ class EAPS9000Driver(Driver):
     def measure_current(self):
         return float(self._query('MEAS:CURR?'))
 
-    # yeah, the series PS 9000 (old) has this boolean inverted...
     def set_output(self, bool):
         if not isinstance(bool, boolean):
             raise ValueError("Expected bool to be a boolean value")
 
+        # yeah, the series PS 9000 (old) has this boolean inverted...
         self._write('OUTP '+ str(int(not bool)))
 
     def get_output(self):
