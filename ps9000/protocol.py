@@ -39,24 +39,15 @@ class EAPS9000Protocol(Protocol):
     def send_message(self, transport, message):        
 
         try:
-            transport.write(message + chr(0xa))
+            transport.write(message + "\r\n")
         except slave.transport.Timeout:
             raise CommunicationError('Received timeout.')
 
-    def read_response_frame(self, transport, retries=4):
-
-        try:
-            last = ord(transport.read_bytes(1))
-        except slave.transport.Timeout:
-            transport.write(chr(Message.CHAR_NAK))
-            return self.read_response_frame(transport, retries - 1)
-
-    
     def read_response(self, transport, max_frames=2):
         try:
             response = transport.read_until("\r\n")
         except slave.transport.Timeout:
-            raise CommunicationError('Could not read response: No delemiter CR LF received')
+            raise CommunicationError('Could not read response: No delemiter CR LF received. Timeout')
 
         return response
 
