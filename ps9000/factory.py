@@ -16,6 +16,7 @@
 
 from e21_util.log import get_sputter_logger
 from e21_util.transport import Serial
+from e21_util.ports import Ports
 from protocol import EAPS9000Protocol
 from driver import EAPS9000Driver
 
@@ -23,9 +24,12 @@ class PS9000Factory:
     def get_logger(self):
         return get_sputter_logger('EA PS 9000 series', 'ps9000.log')
     
-    def create_powersupply(self, device="/dev/ttyUSB17", logger=None):
+    def create_powersupply(self, device=None, logger=None):
         if logger is None:
             logger = self.get_logger()
-            
+
+        if device is None:
+            device = Ports().get_port(Ports.DEVICE_HEATING)
+
         protocol = EAPS9000Protocol(logger=logger)
         return EAPS9000Driver(Serial(device, 9600, 8, 'N', 2, 1), protocol)
