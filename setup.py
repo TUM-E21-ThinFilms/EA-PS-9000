@@ -23,7 +23,7 @@ desc = ('An implementation of the EA PS 9000 series (old)')
 
 setup(
     name='ps9000',
-    version=__import__('stp_ix455').__version__,
+    version=__import__('ps9000').__version__,
     author='Alexander Book',
     author_email='alexander.book@frm2.tum.de',
     license = 'GNU General Public License (GPL), Version 3',
