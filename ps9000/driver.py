@@ -17,14 +17,15 @@ from slave.driver import Driver, Command
 from slave.types import Mapping, Float, String, Integer, Boolean, SingleType
 from protocol import EAPS9000Protocol
 
+
 class EAPS9000Driver(Driver):
 
     def __init__(self, transport, protocol=None):
         if protocol is None:
             protocol = EAPS9000Protocol()
-        
+
         self.thread = None
-        
+
         super(EAPS9000Driver, self).__init__(transport, protocol)
 
     def _write(self, message):
@@ -46,7 +47,7 @@ class EAPS9000Driver(Driver):
         if not isinstance(voltage, (long, int)):
             raise ValueError("Expected voltage to be an integer")
 
-        self._write('VOLT '+ str(voltage))
+        self._write('VOLT ' + str(voltage))
 
     def get_voltage(self):
         return float(self._query('VOLT?'))
@@ -55,7 +56,7 @@ class EAPS9000Driver(Driver):
         if not isinstance(current, (long, int)):
             raise ValueError("Expected current to be an integer")
 
-        self._write('CURR '+ str(current))
+        self._write('CURR ' + str(current))
 
     def get_current(self):
         return float(self._query('CURR?'))
@@ -71,8 +72,7 @@ class EAPS9000Driver(Driver):
             raise ValueError("Expected bool to be a boolean value")
 
         # yeah, the series PS 9000 (old) has this boolean inverted...
-        self._write('OUTP '+ str(int(not bool)))
+        self._write('OUTP ' + str(int(not bool)))
 
     def get_output(self):
         return not bool(self._query('OUTP?'))
-

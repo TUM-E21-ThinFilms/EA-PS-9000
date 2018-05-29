@@ -46,6 +46,7 @@ class EAPS9000Protocol(Protocol):
     def read_response(self, transport, max_frames=2):
         try:
             response = transport.read_until("\r\n")
+            self.logger.debug('Response "%s"', response)
         except slave.transport.Timeout:
             raise CommunicationError('Could not read response: No delemiter CR LF received. Timeout')
 
