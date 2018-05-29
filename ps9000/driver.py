@@ -44,18 +44,12 @@ class EAPS9000Driver(Driver):
         self._write('*RST')
 
     def set_voltage(self, voltage):
-        if not isinstance(voltage, (long, int)):
-            raise ValueError("Expected voltage to be an integer")
-
         self._write('VOLT ' + str(voltage))
 
     def get_voltage(self):
         return float(self._query('VOLT?'))
 
     def set_current(self, current):
-        if not isinstance(current, (long, int)):
-            raise ValueError("Expected current to be an integer")
-
         self._write('CURR ' + str(current))
 
     def get_current(self):
